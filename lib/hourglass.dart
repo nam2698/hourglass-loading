@@ -35,14 +35,49 @@ class _HourglassState extends State<Hourglass> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return RotationTransition(
       turns: Tween(begin: 0.0, end: 0.5).animate(new CurvedAnimation(
-          parent: _animationController, curve: Curves.bounceOut)),
+          parent: _animationController, curve: Curves.easeInOutBack)),
       child: SizedBox(
         width: widget.size,
         height: widget.size,
         child: CustomPaint(
-          painter: HourglassPainter(),
+          painter: HourglassPainter(
+              progress: Tween(begin: 0.0, end: 0.5)
+                  .animate(new CurvedAnimation(
+                      parent: _animationController,
+                      curve: Curves.easeInOutBack))
+                  .value),
         ),
       ),
     );
   }
 }
+
+    // return RotationTransition(
+    //   turns: Tween(begin: 0.0, end: 0.5).animate(new CurvedAnimation(
+    //       parent: _animationController, curve: Curves.easeInOutBack)),
+    //   child: SizedBox(
+    //     width: widget.size,
+    //     height: widget.size,
+    //     child: CustomPaint(
+    //       painter: HourglassPainter( 
+    //           progress: Tween(begin: 0.0, end: 0.5)
+    //               .animate(new CurvedAnimation(
+    //                   parent: _animationController,
+    //                   curve: Curves.easeInOutBack))
+    //               .value),
+    //     ),
+    //   ),
+    // );
+
+
+    // return SizedBox(
+    //   width: widget.size,
+    //   height: widget.size,
+    //   child: CustomPaint(
+    //     painter: HourglassPainter(
+    //         progress: Tween(begin: 0.0, end: 1.0)
+    //             .animate(new CurvedAnimation(
+    //                 parent: _animationController, curve: Curves.easeInCubic))
+    //             .value),
+    //   ),
+    // );

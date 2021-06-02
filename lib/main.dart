@@ -26,10 +26,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange,
+      backgroundColor: Colors.orange[400],
       body: Center(
         child: Hourglass(
-          size: 24,
+          size: 100,
         ),
       ),
     );
