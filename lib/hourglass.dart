@@ -10,14 +10,38 @@ class Hourglass extends StatefulWidget {
   _HourglassState createState() => _HourglassState();
 }
 
-class _HourglassState extends State<Hourglass> {
+class _HourglassState extends State<Hourglass> with TickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    _animationController = new AnimationController(
+        vsync: this, duration: Duration(milliseconds: 500));
+
+    _animationController.forward(from: 0.0);
+    _animationController.addListener(() {
+      setState(() {
+        if (_animationController.status == AnimationStatus.completed) {
+          Future.delayed(Duration(milliseconds: 2000), () {
+            _animationController.forward(from: 0.0);
+          });
+        }
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: widget.size,
-      height: widget.size,
-      child: CustomPaint(
-        painter: HourglassPainter(),
+    return RotationTransition(
+      turns: Tween(begin: 0.0, end: 0.5).animate(new CurvedAnimation(
+          parent: _animationController, curve: Curves.bounceOut)),
+      child: SizedBox(
+        width: widget.size,
+        height: widget.size,
+        child: CustomPaint(
+          painter: HourglassPainter(),
+        ),
       ),
     );
   }

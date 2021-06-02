@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Colors.orange,
       body: Center(
         child: Hourglass(
-          size: 200,
+          size: 24,
         ),
       ),
     );
